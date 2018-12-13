@@ -13,7 +13,7 @@ import com.zycus.ShuffleUsingCollection;
 public class TestShuffle {
 	
 	private List<String> listTest = new ArrayList<>();
-	private ShuffleUsingCollection testObj = new ShuffleUsingCollection();
+	ShuffleUsingCollection obj;
 	
 	@Before
 	public void init() {
@@ -27,26 +27,27 @@ public class TestShuffle {
 		listTest.add("Song8");
 		listTest.add("Song9");
 		listTest.add("Song10");
+		
+		obj = new ShuffleUsingCollection(listTest);
 	    }
 
 	
 	@Test
-	public void playShuffle() {
-		ShuffleUsingCollection obj = new ShuffleUsingCollection(listTest);
-		
-		assertEquals("Testing song play in shuffle mode",true, true);
+	public void test1() {
+		obj.playSong(listTest);
+		assertEquals("Testing song play in shuffle mode",9, obj.getCurrentIndex());
 		
 	}
 	
 	@Test
-	public void previousSongTest() {
-		testObj.previousSong();
-		assertEquals("Testing previos song", true, true);
+	public void test2() {
+		obj.previousSong();
+		assertEquals("Testing previos song", 8, obj.getCurrentIndex());
 	}
 	
 	@Test
-	public void previousNextTest() {
-		testObj.nextSong();
-		assertEquals("Testing next song", true, true);
+	public void test3() {
+		obj.nextSong();
+		assertEquals("Testing next song", 9, obj.getCurrentIndex());
 	}
 }

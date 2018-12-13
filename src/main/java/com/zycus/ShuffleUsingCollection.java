@@ -12,7 +12,11 @@ public class ShuffleUsingCollection implements Runnable{
 	
 
 
-	int currentIndex=0;
+	private static int currentIndex=0;
+	public int getCurrentIndex() {
+		return currentIndex;
+	}
+
 	List<String> mySongList = new ArrayList<>();
 	
 	public ShuffleUsingCollection(List<String> list){
@@ -28,7 +32,11 @@ public class ShuffleUsingCollection implements Runnable{
 	
 	@Override
 	public void run() {
-		for(int i=currentIndex;i<mySongList.size();) {
+		 playSong(mySongList);
+	}
+	
+	public void playSong(List<String> songList) {
+		for(int i=currentIndex;i<mySongList.size();i++) {
 			 try{
 				 Thread.sleep(1000);
 			 } catch(InterruptedException e){
@@ -37,21 +45,20 @@ public class ShuffleUsingCollection implements Runnable{
 				}
 			 currentIndex=i;
 			 System.out.println("Songs played in shuffle manner "+mySongList.get(i));  
-			 i++;
-		} 
-		
+			 //i++;
+		}
 	}
-	
 	//previous the last track will be played
 	public void previousSong() {
 		if(currentIndex!=0) {
 			currentIndex--;
 		}
+		
 	}
 	
 	//next shuffled song will be played
 	public void nextSong() {
-		if(currentIndex!=mySongList.size()) {
+		if(currentIndex!=mySongList.size()-1) {
 			currentIndex++;
 		}
 	}
